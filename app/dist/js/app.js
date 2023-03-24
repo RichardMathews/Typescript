@@ -17,5 +17,5 @@ if (botaoImporta) {
     });
 }
 else {
-    throw Error('Botão importa não foi encontrado.');
+    throw Error('Botão importa não foi encontrado');
 }

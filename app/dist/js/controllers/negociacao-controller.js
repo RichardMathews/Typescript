@@ -11,6 +11,7 @@ import { DiasDaSemana } from '../enums/dias-da-semana.js';
 import { Negociacao } from '../models/negociacao.js';
 import { Negociacoes } from '../models/negociacoes.js';
 import { NegociacoesService } from '../services/negociacoes-service.js';
+import { imprimir } from '../utils/imprimir.js';
 import { MensagemView } from '../views/mensagem-view.js';
 import { NegociacoesView } from '../views/negociacoes-view.js';
 export class NegociacaoController {
@@ -29,6 +30,7 @@ export class NegociacaoController {
             return;
         }
         this.negociacoes.adiciona(negociacao);
+        imprimir(negociacao, this.negociacoes);
         this.limparFormulario();
         this.atualizaView();
     }
@@ -36,7 +38,7 @@ export class NegociacaoController {
         this.negociacoesService
             .obterNegociacoesDoDia()
             .then(negociacoesDeHoje => {
-            for (const negociacao of negociacoesDeHoje) {
+            for (let negociacao of negociacoesDeHoje) {
                 this.negociacoes.adiciona(negociacao);
             }
             this.negociacoesView.update(this.negociacoes);
@@ -64,9 +66,9 @@ __decorate([
     domInjector('#quantidade')
 ], NegociacaoController.prototype, "inputQuantidade", void 0);
 __decorate([
-    domInjector('#mensagemView')
+    domInjector('#valor')
 ], NegociacaoController.prototype, "inputValor", void 0);
 __decorate([
-    logarTempoDeExecucao(),
-    inspect
+    inspect,
+    logarTempoDeExecucao()
 ], NegociacaoController.prototype, "adiciona", null);
